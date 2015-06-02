@@ -31,6 +31,7 @@ public class GUI extends JFrame{
 	public GUI(Game g) {
 		//Call JFrame Constructor and setup Attributes
 		super();
+		setMinimumSize(new Dimension(750, 550));
 		game = g;
 		universe = game.getUniverse();
 		
@@ -73,6 +74,7 @@ public class GUI extends JFrame{
 
 	//Initialize the contents of the frame.
 	private void initialize() {
+		setTitle("Fruit Ninja!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new CardLayout(0, 0));
 		

@@ -32,7 +32,7 @@ public class Game {
 	}
 	
 	public void play() {
-		universe.addItem(new Item(150, 4, -10, universe));
+		universe.addItem(new Fruit(150, 4, -10, universe));
 		activeGame = true;
 		universe.repaint();
 		repaintUniverseTimed(FRAME_TIME);
