@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,8 +23,7 @@ public class GUI extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private Game game;
-	private JPanel settings;
-	private JPanel mainMenu;
+	private JPanel settings, mainMenu;
 	private Universe universe;
 	private boolean fullscreen;
 	private Rectangle DIMENSIONS = new Rectangle(100, 100, 750, 550);
@@ -62,6 +63,12 @@ public class GUI extends JFrame{
 		setBounds(DIMENSIONS);
 		setResizable(true);
 		setVisible(true);
+	}
+	
+	public void pauseUniverse() {
+		universe.setVisible(false);
+		mainMenu.setVisible(true);
+		game.setActiveGame(false);
 	}
 
 	//Initialize the contents of the frame.
@@ -243,8 +250,9 @@ public class GUI extends JFrame{
 		btnPlay.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				universe.setVisible(true);
 				mainMenu.setVisible(false);
+				universe.setVisible(true);
+				game.play();
 			}
 		});
 		
