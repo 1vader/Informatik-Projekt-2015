@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,8 +23,7 @@ public class GUI extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private Game game;
-	private JPanel settings;
-	private JPanel mainMenu;
+	private JPanel settings, mainMenu;
 	private Universe universe;
 	private boolean fullscreen;
 	private Rectangle DIMENSIONS = new Rectangle(100, 100, 750, 550);
@@ -30,6 +31,7 @@ public class GUI extends JFrame{
 	public GUI(Game g) {
 		//Call JFrame Constructor and setup Attributes
 		super();
+		setMinimumSize(new Dimension(750, 550));
 		game = g;
 		universe = game.getUniverse();
 		
@@ -63,9 +65,16 @@ public class GUI extends JFrame{
 		setResizable(true);
 		setVisible(true);
 	}
+	
+	public void pauseUniverse() {
+		universe.setVisible(false);
+		mainMenu.setVisible(true);
+		game.setActiveGame(false);
+	}
 
 	//Initialize the contents of the frame.
 	private void initialize() {
+		setTitle("Fruit Ninja!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new CardLayout(0, 0));
 		
@@ -243,8 +252,9 @@ public class GUI extends JFrame{
 		btnPlay.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				universe.setVisible(true);
 				mainMenu.setVisible(false);
+				universe.setVisible(true);
+				game.play();
 			}
 		});
 		
